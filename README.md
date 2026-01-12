@@ -1,0 +1,2 @@
+# README
+pop-up dictionary
