@@ -1,2 +1,3 @@
 # README
-Pop-Up Dictionary
+
+Monolingual Pop-Up Dictionary for on-the-fly use.
