@@ -27,9 +27,19 @@ function showButton(word) {
 
 let button = null;
 
-document.addEventListener("mouseup", () => {
+document.addEventListener("mouseup", (e) => {
+  // SHIELD: If the user is clicking the "ReadMe" button, stop here.
+  // This prevents the button from "resetting" itself during a click.
+  if (button && button.contains(e.target)) return;
+
   const word = window.getSelection().toString().trim();
-  if (!word) return;
+
+  if (!word) {
+    // If user clicks empty space, remove existing UI
+    removeButton();
+    return;
+  }
+
   showButton(word);
 });
 
@@ -103,10 +113,12 @@ function showPopup(word, def, rect) {
 }
 
 document.addEventListener("mousedown", (e) => {
-  // If we clicked the button, do nothing and let the button's own click handler work
-  if (button && button.contains(e.target)) {
-    return;
-  }
+  const popup = document.getElementById("dictPopup");
+
+  // Only close things if the user clicks OUTSIDE the button and popup
+  if (button && button.contains(e.target)) return;
+  if (popup && popup.contains(e.target)) return;
+
   removeButton();
   removePopup();
 });
