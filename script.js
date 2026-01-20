@@ -23,7 +23,10 @@ function showButton(word) {
 
   document.body.appendChild(button);
 
-  button.onclick = () => lookup(word, rect);
+  button.onclick = (e) => {
+    e.stopPropagation();
+    lookup(word, rect);
+  };
 }
 
 function removeButton() {
@@ -69,9 +72,11 @@ function showPopup(word, def, rect) {
   document.body.appendChild(popup);
 }
 
-document.addEventListener("mousedown", () => {
-  removeButton();
-  removePopup();
+document.addEventListener("mousedown", (e) => {
+  if (e.target !== button) {
+    removeButton();
+    removePopup();
+  }
 });
 
 function removePopup() {
