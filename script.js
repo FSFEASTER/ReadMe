@@ -19,24 +19,38 @@ document.addEventListener("mouseup", (e) => {
 function showButton(word) {
   removeButton();
 
-  const range = window.getSelection().getRangeAt(0);
+  const selection = window.getSelection();
+  if (selection.rangeCount === 0) return;
+
+  const range = selection.getRangeAt(0);
   const rect = range.getBoundingClientRect();
 
   button = document.createElement("button");
   button.textContent = "ReadMe";
-  button.style.position = "absolute";
-  button.style.left = rect.right + window.scrollX + "px";
-  button.style.top = rect.top + window.scrollY + "px";
-  button.style.zIndex = 9999;
-  button.style.padding = "5px";
-  button.style.cursor = "pointer";
+
+  // (Keep your existing styles here)
+  Object.assign(button.style, {
+    position: "absolute",
+    left: `${rect.right + window.scrollX}px`,
+    top: `${rect.top + window.scrollY}px`,
+    zIndex: "9999",
+  });
 
   document.body.appendChild(button);
 
-  button.onclick = (e) => {
+  // --- THE IMPORTANT PART ---
+  button.addEventListener("click", (e) => {
     e.stopPropagation();
+
+    // 1. Remove the "ReadMe" button immediately
+    removeButton();
+
+    // 2. Clear the blue text highlight
+    window.getSelection().removeAllRanges();
+
+    // 3. Proceed to show the dictionary popup
     lookup(word, rect);
-  };
+  });
 }
 
 function removeButton() {
