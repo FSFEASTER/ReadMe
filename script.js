@@ -1,30 +1,3 @@
-console.log("ReadMe Extension Loaded!"); // This should appear when the page refreshes
-
-document.addEventListener("mouseup", () => {
-  const word = window.getSelection().toString().trim();
-  console.log("Selection detected:", word); // Trace 1
-  if (!word) return;
-  showButton(word);
-});
-
-function showButton(word) {
-  removeButton();
-  const range = window.getSelection().getRangeAt(0);
-  const rect = range.getBoundingClientRect();
-
-  button = document.createElement("button");
-  button.textContent = "ReadMe";
-  // ... (keep your styles) ...
-
-  document.body.appendChild(button);
-
-  button.addEventListener("click", (e) => {
-    console.log("Button actually clicked!"); // Trace 2
-    e.stopPropagation();
-    lookup(word, rect);
-  });
-}
-
 let button = null;
 
 document.addEventListener("mouseup", (e) => {
