@@ -12,3 +12,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     }
   );
 });
+function fetchword(word){
+  //wort fetchen
+  const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/${word}';
+  const response = await fetch(url);
+  const data = await response.json();
+
+  })
+}
