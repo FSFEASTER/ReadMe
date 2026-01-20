@@ -27,10 +27,11 @@ function showButton(word) {
 
 let button = null;
 
-document.addEventListener("mouseup", () => {
-  const word = window.getSelection().toString().trim();
-  if (!word) return;
-  showButton(word);
+document.addEventListener("mouseup", (e) => {
+  // If we just clicked the "ReadMe" button, stop right here
+  if (button && button.contains(e.target)) return;
+
+  // ... rest of your selection logic
 });
 
 function showButton(word) {
@@ -103,10 +104,19 @@ function showPopup(word, def, rect) {
 }
 
 document.addEventListener("mousedown", (e) => {
-  // If we clicked the button, do nothing and let the button's own click handler work
-  if (button && button.contains(e.target)) {
+  const popup = document.getElementById("dictPopup");
+
+  // Check if the click target is the button or inside the button
+  const clickedButton = button && button.contains(e.target);
+
+  // Check if the click target is the popup or inside the popup
+  const clickedPopup = popup && popup.contains(e.target);
+
+  // If the user clicked either of our elements, DO NOT remove them.
+  if (clickedButton || clickedPopup) {
     return;
   }
+  // Otherwise, the user clicked the background, so clean up.
   removeButton();
   removePopup();
 });
