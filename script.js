@@ -2,9 +2,7 @@ let button = null;
 
 document.addEventListener("mouseup", () => {
   const word = window.getSelection().toString().trim();
-
   if (!word) return;
-
   showButton(word);
 });
 
@@ -41,7 +39,6 @@ async function lookup(word, rect) {
   );
 
   const data = await res.json();
-
   const def = data[0].meanings[0].definitions[0];
 
   showPopup(word, def, rect);
