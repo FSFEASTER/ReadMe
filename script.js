@@ -37,14 +37,31 @@ function removeButton() {
 }
 
 async function lookup(word, rect) {
-  const res = await fetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
-  );
+  try {
+    const res = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
+    );
+    const data = await res.json();
 
-  const data = await res.json();
-  const def = data[0].meanings[0].definitions[0];
+    if (
+      !data ||
+      data.title === "No Definitions Found" ||
+      !Array.isArray(data)
+    ) {
+      showPopup(word, { definition: "No definition found." }, rect);
+      return;
+    }
 
-  showPopup(word, def, rect);
+    const def = data[0].meanings[0].definitions[0];
+    showPopup(word, def, rect);
+  } catch (error) {
+    console.error("The dictionary lookup failed:", error);
+    showPopup(
+      word,
+      { definition: "Error fetching data. Check your connection." },
+      rect,
+    );
+  }
 }
 
 function showPopup(word, def, rect) {
