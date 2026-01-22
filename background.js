@@ -8,6 +8,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       // Sends the dictionary result back / catches errors and sends an error message
       .then((data) => sendResponse({ data }))
       .catch((error) => sendResponse({ error: error.message }));
-    return true; // Keeps the message channel open for async response
   }
+  return true;
 });

@@ -2,14 +2,12 @@
 let button = null;
 
 document.addEventListener("mouseup", (e) => {
-  // If the user is clicking the "ReadMe" button, this stops the button from simply showing up again because "mouseup" was detected
   if (button && button.contains(e.target)) return;
 
   // Variable "word" is created by taking the selected text in the current tab, which is then converted to a string and any spaces get removed
   const word = window.getSelection().toString().trim();
 
   if (!word) {
-    // If user clicks empty space, remove existing UI
     removeButton();
     return;
   }
@@ -34,7 +32,6 @@ function showButton(word) {
   button = document.createElement("button");
   button.textContent = "ReadMe";
 
-  // Determines the position of the button on the page
   Object.assign(button.style, {
     // Lets the button have specific X and Y coordinates
     position: "absolute",
@@ -48,7 +45,6 @@ function showButton(word) {
   // Makes the button visible in the tab
   document.body.appendChild(button);
 
-  // What happens when the button is clicked
   button.addEventListener("click", (e) => {
     // Prevents the click from triggering any other things such as mousedown etc.
     e.stopPropagation();
