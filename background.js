@@ -1,4 +1,4 @@
-// listens for script.js to send a word to look up
+// Listens for script.js to send a word to look up
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "fetchDefinition") {
     // Calls the API to get the desired data
@@ -9,5 +9,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then((data) => sendResponse({ data }))
       .catch((error) => sendResponse({ error: error.message }));
   }
-  return true;
+  return true; // Keeps the port open
 });
