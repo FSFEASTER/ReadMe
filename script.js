@@ -1,14 +1,11 @@
 let button = null;
 
 document.addEventListener("mouseup", (e) => {
-  // SHIELD: If the user is clicking the "ReadMe" button, stop here.
-  // This prevents the button from "resetting" itself during a click.
   if (button && button.contains(e.target)) return;
 
   const word = window.getSelection().toString().trim();
 
   if (!word) {
-    // If user clicks empty space, remove existing UI
     removeButton();
     return;
   }
@@ -27,8 +24,6 @@ function showButton(word) {
 
   button = document.createElement("button");
   button.textContent = "ReadMe";
-
-  // (Keep your existing styles here)
   Object.assign(button.style, {
     position: "absolute",
     left: `${rect.right + window.scrollX}px`,
@@ -38,17 +33,13 @@ function showButton(word) {
 
   document.body.appendChild(button);
 
-  // --- THE IMPORTANT PART ---
   button.addEventListener("click", (e) => {
     e.stopPropagation();
 
-    // 1. Remove the "ReadMe" button immediately
     removeButton();
 
-    // 2. Clear the blue text highlight
     window.getSelection().removeAllRanges();
 
-    // 3. Proceed to show the dictionary popup
     lookup(word, rect);
   });
 }
@@ -102,7 +93,6 @@ function showPopup(word, def, rect) {
 document.addEventListener("mousedown", (e) => {
   const popup = document.getElementById("dictPopup");
 
-  // Only close things if the user clicks OUTSIDE the button and popup
   if (button && button.contains(e.target)) return;
   if (popup && popup.contains(e.target)) return;
 
