@@ -1,4 +1,5 @@
 {
+  "_comment": "Name of the extension, a short description of what it does, the release version, manifest version, what it does when clicking the icon in the top right-hand corner, the file that acts as the service worker, the permissions (being allowed to run JS and getting data from the current tab), the websites this script can be used on and the file which acts as the content script.",
   "name": "ReadMe - Pop-Up Dictionary",
   "description": "Online monolingual Pop-Up Dictionary",
   "version": "1.0",

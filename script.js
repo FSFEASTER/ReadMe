@@ -1,10 +1,11 @@
+// Creates the button variable as a reference for future actions, prevents accidental creation of buttons down the road
 let button = null;
 
 document.addEventListener("mouseup", (e) => {
-  // SHIELD: If the user is clicking the "ReadMe" button, stop here.
-  // This prevents the button from "resetting" itself during a click.
+  // If the user is clicking the "ReadMe" button, this stops the button from simply showing up again because "mouseup" was detected
   if (button && button.contains(e.target)) return;
 
+  // Variable "word" is created by taking the selected text in the current tab, which is then converted to a string and any spaces get removed
   const word = window.getSelection().toString().trim();
 
   if (!word) {
@@ -12,47 +13,58 @@ document.addEventListener("mouseup", (e) => {
     removeButton();
     return;
   }
-
+  // Calls the function that determines if the button shows up and how it does
   showButton(word);
 });
 
 function showButton(word) {
+  // Any old buttons are removed
   removeButton();
 
+  // Creates variable that contains the selected text
   const selection = window.getSelection();
+  // If nothing is selected, don't show a button
   if (selection.rangeCount === 0) return;
 
+  // Gets the exact position of the word on the tab so that the button and pop-up show up near it
   const range = selection.getRangeAt(0);
   const rect = range.getBoundingClientRect();
 
+  // Creates HTML button object
   button = document.createElement("button");
   button.textContent = "ReadMe";
 
-  // (Keep your existing styles here)
+  // Determines the position of the button on the page
   Object.assign(button.style, {
+    // Lets the button have specific X and Y coordinates
     position: "absolute",
+    // Position of the button, accounts for having scrolled horizontally. Turns the math result into a string
     left: `${rect.right + window.scrollX}px`,
+    // Same for the height
     top: `${rect.top + window.scrollY}px`,
+    // Makes the button show up at the very front of the page so nothing gets layered on top.
     zIndex: "9999",
   });
-
+  // Makes the button visible in the tab
   document.body.appendChild(button);
 
-  // --- THE IMPORTANT PART ---
+  // What happens when the button is clicked
   button.addEventListener("click", (e) => {
+    // Prevents the click from triggering any other things such as mousedown etc.
     e.stopPropagation();
 
-    // 1. Remove the "ReadMe" button immediately
+    // Remove the "ReadMe" button
     removeButton();
 
-    // 2. Clear the blue text highlight
+    // Clear the text highlight
     window.getSelection().removeAllRanges();
 
-    // 3. Proceed to show the dictionary popup
+    // Show the dictionary popup
     lookup(word, rect);
   });
 }
 
+// Guess what this function does
 function removeButton() {
   if (button) {
     button.remove();
@@ -61,12 +73,15 @@ function removeButton() {
 }
 
 async function lookup(word, rect) {
+  // Sends message to background.js, passing the highlighted word
   chrome.runtime.sendMessage(
     { action: "fetchDefinition", word: word },
     (response) => {
+      // If response is error message or no data gets transfered
       if (response.error || !response.data || response.data.title) {
         showPopup(word, { definition: "Definition not found." }, rect);
       } else {
+        // Takes the first entries from the API's transfered arrays
         const def = response.data[0].meanings[0].definitions[0];
         showPopup(word, def, rect);
       }
@@ -99,10 +114,12 @@ function showPopup(word, def, rect) {
   document.body.appendChild(popup);
 }
 
+// Function to close the pop-up if user clicks outside of it
 document.addEventListener("mousedown", (e) => {
+  // Makes referencing the pop-up simpler by having a variable
   const popup = document.getElementById("dictPopup");
 
-  // Only close things if the user clicks OUTSIDE the button and popup
+  // Only close things if the user clicks outside the button and popup
   if (button && button.contains(e.target)) return;
   if (popup && popup.contains(e.target)) return;
 
@@ -110,6 +127,7 @@ document.addEventListener("mousedown", (e) => {
   removePopup();
 });
 
+// Guess what this function does
 function removePopup() {
   const p = document.getElementById("dictPopup");
   if (p) p.remove();
