@@ -102,6 +102,7 @@ function showPopup(word, def, rect) {
   popup.style.maxWidth = "300px";
 
   popup.innerHTML = `
+    <!-- Takes the fetched data and shows it under one another, button and div for additional info -->
     <b>${word}</b><br>
     ${def.definition}
     <br><br>
