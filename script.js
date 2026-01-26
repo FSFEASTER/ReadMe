@@ -103,11 +103,33 @@ function showPopup(word, def, rect) {
 
   popup.innerHTML = `
     <b>${word}</b><br>
-    ${def.definition}<br><br>
+    ${def.definition}
+    <br><br>
     <i>${def.example || ""}</i>
+    <br>
+    <button id: showMoreBtn>Show more</button>
+    <div id="moreInfo" style="display:none;">
+    <b>Synonyms:</b> ${(def.synonyms || []).join(", ") || "None"}<br>
+    <b>Antonyms:</b> ${(def.antonyms || []).join(", ") || "None"}<br>
+    </div>
   `;
 
   document.body.appendChild(popup);
+
+  const btn = popup.querySelector("#showMoreBtn");
+  const more = popup.querySelector("#moreInfo");
+
+  btn.onclick = (e) => {
+    e.stopPropagation();
+
+    if (more.style.display === "none") {
+    more.style.display = "block";
+    btn.textContent = "Show less";
+    } else {
+    more.style.display = "none";
+    btn.textContent = "Show more";
+    }
+  }
 }
 
 // Function to close the pop-up if user clicks outside of it
