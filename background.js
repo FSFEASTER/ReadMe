@@ -11,3 +11,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   return true; // Keeps the port open
 });
+
+
+/*zu übergeben:
+2 defininitionen + beispielsätze (2 EINZELNE ARRAYS)
+3 Synonyme
+3 Antonyme
+1 Audiotrack
+1 phonetics
+*/
