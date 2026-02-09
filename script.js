@@ -83,7 +83,7 @@ async function lookup(word, rect) {
         const defOne = response.data[0].meanings[0].definitions[0];
         const defTwo = response.data[0].meanings[1].definitions[0];
         const defThree = response.data[0].meanings[2].definitions[0];
-        showPopup(word, def, rect);
+        showPopup(word, defOne, defTwo, defThree, rect);
       }
     },
   );
