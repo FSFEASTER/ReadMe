@@ -89,7 +89,7 @@ async function lookup(word, rect) {
   );
 }
 
-function showPopup(word, defOne, rect) {
+function showPopup(word, defOne, defTwo, defThree, rect) {
   removePopup();
 
   const popup = document.createElement("div");
