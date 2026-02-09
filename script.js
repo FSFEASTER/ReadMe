@@ -104,6 +104,9 @@ function showPopup(word, defOne, defTwo, defThree, rect) {
   popup.style.padding = "10px";
   popup.style.borderRadius = "8px";
   popup.style.maxWidth = "300px";
+  popup.style.maxHeight = "400px";
+  popup.style.overflowY = "auto";
+  popup.style.display = "block";
 
   popup.innerHTML = `
     <b>${word}</b><br>
