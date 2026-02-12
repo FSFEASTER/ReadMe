@@ -80,16 +80,14 @@ async function lookup(word, rect) {
         showPopup(word, { definition: "Definition not found." }, rect);
       } else {
         // Takes the first entries from the API's transfered arrays
-        const defOne = response.data[0].meanings[0].definitions[0];
-        const defTwo = response.data[0].meanings[1].definitions[0];
-        const defThree = response.data[0].meanings[2].definitions[0];
-        showPopup(word, defOne, defTwo, defThree, rect);
+        const def = response.data[0].meanings[0].definitions[0];
+        showPopup(word, def, rect);
       }
     },
   );
 }
 
-function showPopup(word, defOne, defTwo, defThree, rect) {
+function showPopup(word, def, rect) {
   removePopup();
 
   const popup = document.createElement("div");
@@ -110,12 +108,8 @@ function showPopup(word, defOne, defTwo, defThree, rect) {
 
   popup.innerHTML = `
     <b>${word}</b><br>
-    ${defOne.definition}<br><br>
-    <i>${defOne.example || ""}</i>
-    ${defTwo.definition || ""}<br><br>
-    <i>${defTwo.example || ""}</i>
-    ${defThree.definition || ""}<br><br>
-    <i>${defThree.example || ""}</i>
+    ${def.definition}<br><br>
+    <i>${def.example || ""}</i>
   `;
 
   document.body.appendChild(popup);
