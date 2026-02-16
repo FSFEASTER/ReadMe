@@ -14,14 +14,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const definition2 = [];
         const synonyms = [];
         const antonyms = [];
-        const entry = data[0];
+        const entry = data[0] || {};
         const meanings = entry.meanings || [];
 
-        for (const meaning of meanings) {
-          for (const def of meaning.definitions || []) {
-            
-          }
-        }
+        const firstMeaning = meanings[0] || {};
+        const firstDef = firstMeaning.definitions
 
 
         // Sends the dictionary result back
