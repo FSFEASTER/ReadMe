@@ -18,7 +18,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const meanings = entry.meanings || [];
 
         const firstMeaning = meanings[0] || {};
-        const firstDef = firstMeaning.definitions
+        const firstDefs = firstMeaning.definitions
+        definition1.push(
+          firstDefs[0]?.definition ?? null,
+          firstDefs[0]?.example ?? null,
+          firstDefs[1]?.definition == null,
+          firstDefs[1]?.example ?? null
+        );
+
+        let secondMeaning = null;
+        if (meanings[1]){
+          secondMeaning = meanings[1];
+        }
+        else if (data[1]?.meanings?.[0]){
+          secondMeaning = data[1].meanings
+        }
 
 
         // Sends the dictionary result back
