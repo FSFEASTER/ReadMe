@@ -117,7 +117,7 @@ function showPopup(word, def, rect) {
     <div id="moreInfo" style="display:none;">
     ${def.definition2[0]}
     <br>
-    ${def.definition2[1]}
+    <i>${def.definition2[1]}</i>
     <br>
     <b>Synonyms:</b> ${(def.synonyms || []).join(", ") || "None"}<br>
     <b>Antonyms:</b> ${(def.antonyms || []).join(", ") || "None"}<br>
