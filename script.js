@@ -113,6 +113,10 @@ function showPopup(word, def, rect) {
     <br>
     <button id: showMoreBtn>Show more</button>
     <div id="moreInfo" style="display:none;">
+    ${def.definition2[0]}
+    <br>
+    ${def.definition2[1]}
+    <br>
     <b>Synonyms:</b> ${(def.synonyms || []).join(", ") || "None"}<br>
     <b>Antonyms:</b> ${(def.antonyms || []).join(", ") || "None"}<br>
     </div>
