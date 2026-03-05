@@ -78,7 +78,7 @@ async function lookup(word, rect) {
         showPopup(word, { definition: "Definition not found." }, rect);
       } else {
         // Takes the first entries from the API's transfered arrays
-        const def = response.data[0].meanings[0].definitions[0];
+        const def = response
         showPopup(word, def, rect);
       }
     },
@@ -107,9 +107,9 @@ function showPopup(word, def, rect) {
   popup.innerHTML = `
     <!-- Takes the fetched data and shows it under one another, button and div for additional info -->
     <b>${word}</b><br>
-    ${def.definition}
+    ${def.definition1[0]}
     <br><br>
-    <i>${def.example || ""}</i>
+    <i>${def.definition1[1] || ""}</i>
     <br>
     <button id: showMoreBtn>Show more</button>
     <div id="moreInfo" style="display:none;">
