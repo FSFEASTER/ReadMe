@@ -1,3 +1,5 @@
+console.log("Extension geladen")
+
 // Creates the button variable as a reference for future actions, prevents accidental creation of buttons down the road
 let button = null;
 
