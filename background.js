@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         definition1.push(
           firstDefs[0]?.definition ?? null,
           firstDefs[0]?.example ?? null,
-          firstDefs[1]?.definition == null,
+          firstDefs[1]?.definition ?? null,
           firstDefs[1]?.example ?? null
         );
 
@@ -30,13 +30,30 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (meanings[1]){
           secondMeaning = meanings[1];
         }
+
         else if (data[1]?.meanings?.[0]){
-          secondMeaning = data[1].meanings
+          secondMeaning = data[1].meanings[0];
+        }
+
+        if(secondMeaning && secondMeaning.definitions){
+          const defs = secondMeaning.definitions || [];
+          definition2.push(
+            defs[0]?.definition ?? null,
+            defs[0]?.example ?? null,
+            defs[1]?.definition ?? null,
+            defs[1]?.example ?? null
+          );
+        }
+        else {
+          definition2.push(null, null, null, null)
         }
 
 
         // Sends the dictionary result back
-        sendResponse({data});
+        sendResponse({
+          definition1,
+          definition2
+        });
         // catch error and send error message
       }  catch (error) {
         sendResponse({error: error.message});
