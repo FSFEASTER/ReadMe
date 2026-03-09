@@ -113,13 +113,15 @@ function showPopup(word, def, rect) {
     <br><br>
     <i>${def.definition1[1] || ""}</i>
     <br>
-    <button id: showMoreBtn>Show more</button>
+    <button id="showMoreBtn">Show more</button>
     <div id="moreInfo" style="display:none;">
     ${def.definition2[0]}
     <br>
     <i>${def.definition2[1]}</i>
     <br>
-    <b>Synonyms:</b> ${(def.synonyms || []).join(", ") || "None"}<br>
+    <b>Synonyms:</b> ${(def.synonyms[0]|| []).join(", ") || "None"}<br>
+    <b>Synonyms:</b> ${(def.synonyms[1]|| []).join(", ") || "None"}<br>
+    <b>Synonyms:</b> ${(def.synonyms[2]|| []).join(", ") || "None"}<br>
     <b>Antonyms:</b> ${(def.antonyms || []).join(", ") || "None"}<br>
     </div>
   `;
