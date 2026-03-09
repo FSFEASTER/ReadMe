@@ -52,7 +52,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // Sends the dictionary result back
         sendResponse({
           definition1,
-          definition2
+          definition2,
+          synonyms: [],
+          antonyms: []  
         });
         // catch error and send error message
       }  catch (error) {
