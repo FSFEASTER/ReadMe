@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         definition1.push(
           firstDefs[0]?.definition ?? null,
           firstDefs[0]?.example ?? null,
-          firstDefs[1]?.definition == null,
+          firstDefs[1]?.definition ?? null,
           firstDefs[1]?.example ?? null
         );
 
@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
 
         if(secondMeaning && secondMeaning.definitions){
-          const defs = secondMeaning.defintions;
+          const defs = secondMeaning.definitions || [];
           definition2.push(
             defs[0]?.definition ?? null,
             defs[0]?.example ?? null,

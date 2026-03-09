@@ -76,18 +76,19 @@ async function lookup(word, rect) {
     { action: "fetchDefinition", word: word },
     (response) => {
       // If response is error message or no data gets transfered
-      if (response.error || !response.data || response.data.title) {
+      if (response.error || !response.definition1) {
         showPopup(word, { definition: "Definition not found." }, rect);
+        return;
       } else {
         // Takes the first entries from the API's transfered arrays
-        const def = response.data[0].meanings[0].definitions[0];
-        showPopup(word, def, rect);
+
+        showPopup(word, response, rect);
       }
     },
   );
 }
 
-function showPopup(word, def, rect) {
+function showPopup(word, data, rect) {
   removePopup();
 
   const popup = document.createElement("div");
@@ -108,8 +109,8 @@ function showPopup(word, def, rect) {
 
   popup.innerHTML = `
     <b>${word}</b><br>
-    ${def.definition}<br><br>
-    <i>${def.example || ""}</i>
+    ${data.definition1[0]}<br><br>
+    <i>${data.definition1[1] || ""}</i>
   `;
 
   document.body.appendChild(popup);
