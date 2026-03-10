@@ -108,27 +108,25 @@ function showPopup(word, data, rect) {
   popup.style.display = "block";
 
   popup.innerHTML = `
-    <!-- Takes the fetched data and shows it under one another, button and div for additional info -->
-    <b>${word}</b>
-    <br>
-    ${data.definition1[0]}
-    <br><br>
-    <i>${data.definition1[1] || ""}</i>
-    <br>
-    ${data.definition1[2]}
-    <br><br>
-    <i>${data.definition1[3] || ""}</i>
-    <br>
-    <button id="showMoreBtn">Show more</button>
-    <div id="moreInfo" style="display:none;">
-    <br>
-    ${data.definition2[0]}
-    <br>
-    <i>${data.definition2[1]}</i>
-    <br>
-    <b>Synonyms:</b> ${(data.synonyms[0]), (data.synonyms[1]), (data.synonyms[2])}
-    </div> 
-  `;
+  <b>${word}</b>
+
+  ${data.definition1[0] ? `<br><div>${data.definition1[0]}</div><br>` : ""}
+  ${data.definition1[1] ? `<i>${data.definition1[1]}</i><br>` : ""}
+
+  ${data.definition1[2] ? `<br><div>${data.definition1[2]}</div><br>` : ""}
+  ${data.definition1[3] ? `<i>${data.definition1[3]}</i><br>` : ""}
+
+  <button id="showMoreBtn">Show more</button>
+
+  <div id="moreInfo" style="display:none;">
+
+  ${data.definition2[0] ? `<br><div>${data.definition2[0]}</div><br>` : ""}
+  ${data.definition2[1] ? `<i>${data.definition2[1]}</i><br>` : ""}
+
+  <b>Synonyms:</b> ${(data.synonyms ?? []).join(", ") || "None"}
+
+  </div>
+`;
 
   document.body.appendChild(popup);
 
