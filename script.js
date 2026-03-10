@@ -126,7 +126,7 @@ function showPopup(word, data, rect) {
     <br>
     <i>${data.definition2[1]}</i>
     <br>
-    <b>Synonyms:</b> ${(data.synonyms[0]), (data.synonyms[1]), (data.synonyms[2])}
+    <b>Synonyms:</b> ${(data.synonyms1[0]), (data.synonyms1[1]), (data.synonyms1[2])}
     </div> 
   `;
 
