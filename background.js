@@ -11,6 +11,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // HTTP response gets turned into JS object
         const data = await response.json();
 
+        let validWord = Array.isArray(data);
+        const entry = validWord ? data[0] : {};
         let phonetic = null;
         const definition1 = [];
         const definition2 = [];
@@ -18,7 +20,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const synonyms2 = [];
         const antonyms1 = [];
         const antonyms2 = [];
-        const entry = data[0] || {};
         const meanings = entry.meanings || [];
 
         if (entry.phonetic) {
@@ -86,6 +87,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               antonyms2.push(a);
             }
           }
+        }
+
+        if (validWord) {
+          chrome.storage.local.get(["history"], (result) => {
+            let history = result.history || [];
+            history.unshift(request.word);
+            history = [...new Set(history)];
+            
+          })
         }
 
         // Sends the dictionary result back
