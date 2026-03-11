@@ -116,6 +116,9 @@ function showPopup(word, data, rect) {
   ${data.definition1[2] ? `<br><div>${data.definition1[2]}</div><br>` : ""}
   ${data.definition1[3] ? `<i>${data.definition1[3]}</i><br>` : ""}
 
+  <b>Synonyms:</b> ${(data.synonyms1 ?? []).join(", ") || "None"}<br>
+  <b>Antonyms:</b> ${(data.antonyms1 ?? []).join(", ") || "None"}
+
   <button id="showMoreBtn">Show more</button>
 
   <div id="moreInfo" style="display:none;">
@@ -123,8 +126,8 @@ function showPopup(word, data, rect) {
   ${data.definition2[0] ? `<br><div>${data.definition2[0]}</div><br>` : ""}
   ${data.definition2[1] ? `<i>${data.definition2[1]}</i><br>` : ""}
 
-  <b>Synonyms:</b> ${(data.synonyms1 ?? []).join(", ") || "None"}<br>
-  <b>Antonyms:</b> ${(data.antonyms1 ?? []).join(", ") || "None"}
+  <b>Synonyms:</b> ${(data.synonyms2 ?? []).join(", ") || "None"}<br>
+  <b>Antonyms:</b> ${(data.antonyms2 ?? []).join(", ") || "None"}
 
   </div>
 `;
