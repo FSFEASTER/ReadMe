@@ -123,7 +123,8 @@ function showPopup(word, data, rect) {
   ${data.definition2[0] ? `<br><div>${data.definition2[0]}</div><br>` : ""}
   ${data.definition2[1] ? `<i>${data.definition2[1]}</i><br>` : ""}
 
-  <b>Synonyms:</b> ${(data.synonyms ?? []).join(", ") || "None"}
+  <b>Synonyms:</b> ${(data.synonyms1 ?? []).join(", ") || "None"}<br>
+  <b>Antonyms:</b> ${(data.antonyms1 ?? []).join(", ") || "None"}
 
   </div>
 `;
