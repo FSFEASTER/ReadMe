@@ -84,7 +84,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
 
           for (const a of secondMeaning.antonyms || []) {
-            if (antonyms2.length < 3 && !antonyms2.includes(s)) {
+            if (antonyms2.length < 3 && !antonyms2.includes(a)) {
               antonyms2.push(a);
             }
           }
