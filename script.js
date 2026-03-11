@@ -1,4 +1,4 @@
-console.log("Extension geladen")
+console.log("Extension geladen");
 
 // Creates the button variable as a reference for future actions, prevents accidental creation of buttons down the road
 let button = null;
@@ -103,7 +103,7 @@ function showPopup(word, data, rect) {
   popup.style.padding = "10px";
   popup.style.borderRadius = "8px";
   popup.style.maxWidth = "300px";
-  popup.style.maxHeight = "400px"
+  popup.style.maxHeight = "400px";
   popup.style.overflowY = "auto";
   popup.style.display = "block";
 
@@ -137,13 +137,13 @@ function showPopup(word, data, rect) {
     e.stopPropagation();
 
     if (more.style.display === "none") {
-    more.style.display = "block";
-    btn.textContent = "Show less";
+      more.style.display = "block";
+      btn.textContent = "Show less";
     } else {
-    more.style.display = "none";
-    btn.textContent = "Show more";
+      more.style.display = "none";
+      btn.textContent = "Show more";
     }
-  }
+  };
 }
 
 // Function to close the pop-up if user clicks outside of it

@@ -12,15 +12,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         const definition1 = [];
         const definition2 = [];
-        const synonyms = [];
-        const antonyms = [];
+        const synonyms1 = [];
+        const synonyms2 = [];
+        const antonyms1 = [];
+        const antonyms2 = [];
         const entry = data[0] || {};
         const meanings = entry.meanings || [];
 
         const firstMeaning = meanings[0] || {};
-        const firstDefs = firstMeaning.definitions
+        const firstDefs = firstMeaning.definitions || [];
         definition1.push(
-          firstDefs[0]?.definition ?? null,
+          firstDefs[0]?.definition ?? "Definition not found.",
           firstDefs[0]?.example ?? null,
           firstDefs[1]?.definition ?? null,
           firstDefs[1]?.example ?? null
@@ -53,8 +55,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse({
           definition1,
           definition2,
-          synonyms: [],
-          antonyms: []  
+          synonyms1,
+          synonyms2,
+          antonyms1,
+          antonyms2
         });
         // catch error and send error message
       }  catch (error) {
