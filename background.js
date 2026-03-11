@@ -50,6 +50,35 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           definition2.push(null, null, null, null)
         }
 
+        //Synonyms / Antonyms for meaning 1
+        for (const s of (firstMeaning.synonyms || [])) {
+          if (synonyms1.length < 3 && !synonyms1.includes(s)) {
+            synonyms1.push(s);
+          }
+        }
+
+        for (const a of (firstMeaning.antonyms || [])) {
+          if (antonyms1.length < 3 && !antonyms1.includes(a)) {
+            antonyms1.push(a);
+          }
+        }
+
+        // Synonyms / Antonyms for meaning 2
+        if (secondMeaning) {
+
+          for (const s of (secondMeaning.synonyms || [])) {
+            if (synonyms2.length < 3 && !synonyms2.includes(s)) {
+              synonyms2.push(s);
+            }
+          }
+
+          for (const a of (secondMeaning.antonyms || [])) {
+            if (antonyms2.length < 3 && !antonyms2.includes(s)) {
+              antonyms2.push(a);
+            }
+          }
+        }
+
 
         // Sends the dictionary result back
         sendResponse({
