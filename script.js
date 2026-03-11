@@ -109,7 +109,7 @@ function showPopup(word, data, rect) {
 
   popup.innerHTML = `
   <b>${word}</b>
-  <i>${data.phonetics ? `<div>${data.phonetics}</div><br>` : ""}
+  <i>${data.phonetic ? `<div>${data.phonetic}</div><br>` : ""}
 
   ${data.definition1[0] ? `<br><div>${data.definition1[0]}</div><br>` : ""}
   ${data.definition1[1] ? `<i>${data.definition1[1]}</i><br>` : ""}
