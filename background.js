@@ -11,6 +11,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // HTTP response gets turned into JS object
         const data = await response.json();
 
+        let phonetic = null;
         const definition1 = [];
         const definition2 = [];
         const synonyms1 = [];
@@ -19,6 +20,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const antonyms2 = [];
         const entry = data[0] || {};
         const meanings = entry.meanings || [];
+
+        if (entry.phonetic) {
+          phonetic = entry.phonetic;
+        }
+
+        else if (entry.phonetics) {
+          for (const p of entry.phonetics) {
+            if (p.text) {
+              phonetic = p.text;
+              break;
+            }
+          }
+        }
 
         const firstMeaning = meanings[0] || {};
         const firstDefs = firstMeaning.definitions || [];
@@ -84,6 +98,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           synonyms2,
           antonyms1,
           antonyms2,
+          phonetic
         });
         // catch error and send error message
       } catch (error) {
