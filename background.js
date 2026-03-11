@@ -23,9 +23,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         if (entry.phonetic) {
           phonetic = entry.phonetic;
-        }
-
-        else if (entry.phonetics) {
+        } else if (entry.phonetics) {
           for (const p of entry.phonetics) {
             if (p.text) {
               phonetic = p.text;
@@ -98,7 +96,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           synonyms2,
           antonyms1,
           antonyms2,
-          phonetic
+          phonetic,
         });
         // catch error and send error message
       } catch (error) {

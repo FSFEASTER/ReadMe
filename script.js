@@ -117,10 +117,10 @@ function showPopup(word, data, rect) {
   ${data.definition1[2] ? `<br><div>${data.definition1[2]}</div><br>` : ""}
   ${data.definition1[3] ? `<i>${data.definition1[3]}</i><br>` : ""}
 
-  <b>Synonyms:</b> ${(data.synonyms1 ?? []).join(", ") || "None"}<br>
+  <br><b>Synonyms:</b> ${(data.synonyms1 ?? []).join(", ") || "None"}<br>
   <b>Antonyms:</b> ${(data.antonyms1 ?? []).join(", ") || "None"}
 
-  <button id="showMoreBtn">Show more</button>
+  <br><button id="showMoreBtn">Show more</button>
 
   <div id="moreInfo" style="display:none;">
 
