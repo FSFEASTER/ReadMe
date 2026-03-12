@@ -107,10 +107,12 @@ function showPopup(word, data, rect) {
   popup.style.overflowY = "auto";
   popup.style.display = "block";
 
+  // Content of the popup
   popup.innerHTML = `
   <b>${word}</b>
   <i>${data.phonetic ? `<div>${data.phonetic}</div><br>` : ""}
 
+  <!-- this entire block first checks if the given index exists, and only then adds it -->
   ${data.definition1[0] ? `<br><div>${data.definition1[0]}</div><br>` : ""}
   ${data.definition1[1] ? `<i>${data.definition1[1]}</i><br>` : ""}
 
@@ -122,6 +124,7 @@ function showPopup(word, data, rect) {
 
   <br><button id="showMoreBtn">Show more</button>
 
+  <!-- the other definitions & co only show up when clicking the show more button -->
   <div id="moreInfo" style="display:none;">
 
   ${data.definition2[0] ? `<br><div>${data.definition2[0]}</div><br>` : ""}
@@ -138,6 +141,7 @@ function showPopup(word, data, rect) {
   const btn = popup.querySelector("#showMoreBtn");
   const more = popup.querySelector("#moreInfo");
 
+  // Backend of the show more button
   btn.onclick = (e) => {
     e.stopPropagation();
 
