@@ -93,7 +93,7 @@ function showPopup(word, data, rect) {
 
   const popup = document.createElement("div");
   popup.id = "dictPopup";
-
+  // Styling of the popup
   popup.style.position = "absolute";
   popup.style.left = rect.left + window.scrollX + "px";
   popup.style.top = rect.bottom + window.scrollY + 10 + "px";
