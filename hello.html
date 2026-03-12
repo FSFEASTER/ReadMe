@@ -1,5 +1,48 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: sans-serif;
+        width: 220px;
+        padding: 12px;
+        background: #1e1e1e;
+        color: #f0f0f0;
+        margin: 0;
+      }
+      h2 {
+        font-size: 14px;
+        margin: 0 0 10px 0;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        padding: 6px 8px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: default;
+      }
+      li:hover {
+        background: #333;
+      }
+      .empty {
+        color: #666;
+        font-size: 13px;
+        font-style: italic;
+      }
+    </style>
+  </head>
   <body>
-    <h1 id="output">Nichts markiert</h1>
+    <h2>🔍 Lookup History</h2>
+    <ul id="historyList"></ul>
+
+    <script src="popup.js"></script>
   </body>
 </html>

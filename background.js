@@ -88,7 +88,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
         }
 
-
+        if (definition1[0] !== "Definition not found.") {
+          await saveToHistory(request.word);
+        }
+        
 
         // Sends the dictionary result back
         sendResponse({
@@ -109,6 +112,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   return true; // Keeps the port open
 });
+
+async function saveToHistory(word) {
+  const { history = [] } = await chrome.storage.local.get("history");
+  const filtered = history.filter((w) => w.toLowerCase() !== word.toLowerCase());
+  const updated = [word, ...filtered].slice(0, 10);
+  await chrome.storage.local.set({ history: updated });
+}
 
 /*zu übergeben:
 2 defininitionen + beispielsätze (2 EINZELNE ARRAYS)
