@@ -128,11 +128,3 @@ async function saveToHistory(word) {
   //sets updated history
   await chrome.storage.local.set({ history: updated });
 }
-
-/*zu übergeben:
-2 defininitionen + beispielsätze (2 EINZELNE ARRAYS)
-3 Synonyme
-3 Antonyme
-1 Audiotrack
-1 phonetics
-*/
