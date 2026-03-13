@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         // HTTP response gets turned into JS object
         const data = await response.json();
-
+        // creating all the arrays we send back as response
         let phonetic = null;
         const definition1 = [];
         const definition2 = [];
@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const antonyms2 = [];
         const entry = data[0] || []
         const meanings = entry.meanings || [];
-
+        // locating phonetics in array and saving them
         if (entry.phonetic) {
           phonetic = entry.phonetic;
         } else if (entry.phonetics) {
@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             }
           }
         }
-
+        // saving definitions & examples of first part of speech
         const firstMeaning = meanings[0] || {};
         const firstDefs = firstMeaning.definitions || [];
         definition1.push(
@@ -42,12 +42,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         );
 
         let secondMeaning = null;
+        // finding location of definition & example of second part of speech in api
         if (meanings[1]) {
           secondMeaning = meanings[1];
         } else if (data[1]?.meanings?.[0]) {
           secondMeaning = data[1].meanings[0];
         }
-
+        // saving definitions & examples of second part of speech
         if (secondMeaning && secondMeaning.definitions) {
           const defs = secondMeaning.definitions || [];
           definition2.push(
@@ -88,6 +89,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
         }
 
+        // calls saveToHistory if the word exists in api
         if (definition1[0] !== "Definition not found.") {
           await saveToHistory(request.word);
         }
@@ -113,17 +115,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   return true; // Keeps the port open
 });
 
+// saves current word to local chrome history
 async function saveToHistory(word) {
+  // gets the history from chrome local storage
   const { history = [] } = await chrome.storage.local.get("history");
+
+  // makes sure word is unique
   const filtered = history.filter((w) => w.toLowerCase() !== word.toLowerCase());
+  // limits array length to 10
   const updated = [word, ...filtered].slice(0, 10);
+
+  //sets updated history
   await chrome.storage.local.set({ history: updated });
 }
-
-/*zu übergeben:
-2 defininitionen + beispielsätze (2 EINZELNE ARRAYS)
-3 Synonyme
-3 Antonyme
-1 Audiotrack
-1 phonetics
-*/
